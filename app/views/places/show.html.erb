@@ -1,0 +1,42 @@
+<% provide :head_tags do %>
+    <meta name='turbolinks-visit-control' content='reload'>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        initMap(<%=@place.latitude%>, <%=@place.longitude%>)
+    });
+    </script>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+<div class="container text-center" style="margin: auto">
+  <p>
+    <strong>Where's <%= @place.name %></strong>
+  </p>
+
+  <p>Last Updated: <%= @place.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %B %d at %I:%M%p") %></p>
+
+  <p>
+    <strong>Latitude:</strong>
+    <%= @place.latitude %>
+  </p>
+
+  <p>
+    <strong>Longitude:</strong>
+    <%= @place.longitude %>
+  </p>
+
+</div>
+
+  <div id="map" style="width: 50rem; height: 50rem; margin: auto;"></div>
+
+
+
+
+<div class="container">
+  <%= button_to [:set_location, @place], class: "btn btn-primary" do %>
+    Set Location for <strong><%= @place.name %></strong>
+  <% end %>
+
+</div>
+<%= link_to 'Edit', edit_place_path(@place) %> |
+<%= link_to 'Back', places_path %>
