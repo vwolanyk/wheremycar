@@ -23,6 +23,7 @@ function initMap(lat, lng) {
                    var userCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                    var marker = new google.maps.Marker({
                        position: userCoords,
+                       draggable:true,
                        map: map
 
                    });
