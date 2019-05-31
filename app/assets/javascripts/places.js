@@ -32,9 +32,5 @@ function initMap(lat, lng) {
                    });
                   });
 map.fitBounds(bounds);
-var listener = google.maps.event.addListener(map, "idle", function() {
-  if (map.getZoom() > 20) map.setZoom(20);
-  google.maps.event.removeListener(listener);
-});
 
 }
