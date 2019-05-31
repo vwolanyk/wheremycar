@@ -7,38 +7,21 @@
     </script>
 <% end %>
 
-<p id="notice"><%= notice %></p>
-<div class="container text-center" style="margin: auto">
-  <p>
-    <h1><strong>Where's <%= @place.name %></strong></h1>
-  </p>
+<div class="jumbotron text-center" style="margin: auto; background-color:#298689; color: black; font-family: tahoma; font-size: 10rem;";>
+  <h1 style="font-size: .25em;;"><strong>Where's <%= @place.name %>?</strong></h1>
 
-  <p>Last Updated: <%= @place.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %B %d at %I:%M%p") %></p>
 
-  <p>
-    <strong>Latitude:</strong>
-    <%= @place.latitude %>
-  </p>
-
-  <p>
-    <strong>Longitude:</strong>
-    <%= @place.longitude %>
-  </p>
 
 </div>
 
-  <div id="map" style="width: 90%; height: 30rem; margin: auto;"></div>
+  <div id="map" style="height: 40rem; margin: auto;"></div>
 
-
-
-
-
-
-  <%= button_to [:set_location, @place], class: "btn btn-primary btn-lg btn-block", style: "margin: 1rem auto; width: 90%" do %>
-    Set Location for <strong><%= @place.name %></strong>
+  <%= button_to [:set_location, @place], class: "btn btn-primary btn-lg btn-block", style: "background-color: #7AC53A; height: 7rem;" do %>
+    <h2>Set Location</h2>
   <% end %>
 
+  <div class=" jumbotron text-center" style="background-color:#298689;">
+    <h3 style="color: black;">Last Updated: <%= @place.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %B %d at %I:%M%p") %></h3>
+    <p id="notice"><%= notice %></p>
 
-
-<%= link_to 'Edit', edit_place_path(@place) %> |
-<%= link_to 'Back', places_path %>
+  </div>
