@@ -12,25 +12,26 @@ function initMap(lat, lng) {
         map: map
     });
     bounds.extend(marker.position);
-    navigator.geolocation.getCurrentPosition(function(position) {
+            navigator.geolocation.getCurrentPosition(function(position) {
                     var pos = {
                       lat: position.coords.latitude,
                       lng: position.coords.longitude
                     };
                    var userCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                   var marker = new google.maps.Marker({
+                   var drag_marker = new google.maps.Marker({
                        position: userCoords,
                        map: map,
                        draggable: true
                    });
-                   bounds.extend(marker.position);
+
                    document.cookie = "latitude="+position.coords.latitude;
                    document.cookie = "longitude="+position.coords.longitude;
-                   google.maps.event.addListener(marker, 'dragend', function (event) {
-                     document.cookie = "latitude="+marker.position.lat();
-                     document.cookie = "longitude="+marker.position.lng();
+                   google.maps.event.addListener(drag_marker, 'dragend', function (event) {
+                     document.cookie = "latitude="+drag_marker.position.lat();
+                     document.cookie = "longitude="+drag_marker.position.lng();
                    });
+                   bounds.extend(drag_marker.position);
                   });
-map.fitBounds(bounds);
 
+map.fitBounds(bounds, 200);
 }
