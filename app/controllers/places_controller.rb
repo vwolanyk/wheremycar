@@ -40,9 +40,9 @@ class PlacesController < ApplicationController
   def set_location
     respond_to do |format|
       if @place.update(set_location_params)
-        format.html { redirect_to @place, notice: 'Place was successfully updated.' }
+        format.html { redirect_to '/', notice: 'Thanks For Parking the Car!' }
       else
-        format.html { render :show, notice: 'Ooopsy Something went real bad' }
+        format.html { render "/", notice: 'Ooopsy Something went real bad' }
       end
     end
   end
