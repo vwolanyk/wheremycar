@@ -1,17 +1,22 @@
 <% provide :head_tags do %>
     <meta name='turbolinks-visit-control' content='reload'>
   <script>
-    document.addEventListener("DOMContentLoaded", function(){
-        initMap(<%= @place.latitude%>, <%= @place.longitude%>)
-    });
+    // document.addEventListener("DOMContentLoaded", function(){
+    //     initMap(<%= @place.latitude%>, <%= @place.longitude%>)
+    // });
+    // document.addEventListener("DOMContentLoaded", function(){
+    //     initMap(<%= @place.latitude%>, <%= @place.longitude%>)
+    // });
     </script>
 <% end %>
 
 <div class="text-center" style="margin: auto; background-color:#298689; color: black; font-family: tahoma; padding: .5 rem;";>
-  <h1 style="font-size: 3rem; padding: 1.5rem; margin: auto;"><strong>Where's The Car?</strong></h1>
+  <h1 style="font-size: 3rem; padding: 1.5rem; margin: auto;"><strong>Dude Where's My Car?</strong></h1>
  <p id="notice" style="margin: auto; padding-bottom: 1rem;"><%= notice %></p></div>
 
-  <div id="map" style="height: 70rem; margin: auto;"></div>
+  <div >
+    <%= tag.div nil, id: 'map', data: { place: @place.to_json }, style: "height: 65rem; margin: auto;" %>
+  </div>
 
   <div class="" style="text-align:center;">
     <h3 style="margin-top: 1rem; font-size: 2rem;">Park the Car</h2>
