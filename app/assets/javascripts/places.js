@@ -56,13 +56,15 @@ function success(pos) {
     lng: crd.longitude,
     draggable: true
   });
-  bounds.extend(locationMarker.position);
+
   document.cookie = "latitude="+crd.latitude;
   document.cookie = "longitude="+crd.longitude;
   google.maps.event.addListener(locationMarker, 'dragend', function (event) {
    document.cookie = "latitude="+locationMarker.position.lat();
    document.cookie = "longitude="+locationMarker.position.lng();
+
  });
+ bounds.extend(locationMarker.position);
 };
 
 function error(err) {
@@ -81,5 +83,6 @@ var carMarker = map.addMarker({
 bounds.extend(carMarker.position);
 
 map.fitBounds(bounds);
+map.panToBounds(bounds);  
 
 });
