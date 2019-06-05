@@ -39,18 +39,10 @@
 document.addEventListener("turbolinks:load", function(){
 var place = JSON.parse(document.querySelector("#map").dataset.place);
 var map = new GMaps({
-  div: '#map',
-  lat: place.latitude,
-  lng: place.longitude
+  div: '#map'
 });
+var bounds = new google.maps.LatLngBounds();
 
-var image = "https://img.icons8.com/color/48/000000/car-top-view.png";
-var carMarker = map.addMarker({
-  lat: place.latitude,
-  lng: place.longitude,
-  title: 'Voiture',
-  icon: image
-});
 navigator.geolocation.getCurrentPosition(success, error, options);
 var options = {
   enableHighAccuracy: true,
@@ -64,9 +56,10 @@ function success(pos) {
     lng: crd.longitude,
     draggable: true
   });
+  bounds.extend(locationMarker.position);
   document.cookie = "latitude="+crd.latitude;
   document.cookie = "longitude="+crd.longitude;
- google.maps.event.addListener(locationMarker, 'dragend', function (event) {
+  google.maps.event.addListener(locationMarker, 'dragend', function (event) {
    document.cookie = "latitude="+locationMarker.position.lat();
    document.cookie = "longitude="+locationMarker.position.lng();
  });
@@ -77,5 +70,16 @@ function error(err) {
 }
 
 
+var image = "https://img.icons8.com/color/48/000000/car-top-view.png";
+var carMarker = map.addMarker({
+  lat: place.latitude,
+  lng: place.longitude,
+  title: 'Voiture',
+  icon: image
+});
+
+bounds.extend(carMarker.position);
+
+map.fitBounds(bounds);
 
 });
