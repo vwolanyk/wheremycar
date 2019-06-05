@@ -39,8 +39,10 @@
 document.addEventListener("turbolinks:load", function(){
 var place = JSON.parse(document.querySelector("#map").dataset.place);
 var map = new GMaps({
-  div: '#map'
+  div: '#map',
+  zoom: 17
 });
+
 var bounds = new google.maps.LatLngBounds();
 
 navigator.geolocation.getCurrentPosition(success, error, options);
@@ -70,7 +72,7 @@ function success(pos) {
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
-
+setTimeout(function(){}, 700);
 
 var image = "https://img.icons8.com/color/48/000000/car-top-view.png";
 var carMarker = map.addMarker({
@@ -81,8 +83,8 @@ var carMarker = map.addMarker({
 });
 
 bounds.extend(carMarker.position);
-
+window.bounds = bounds;
 map.fitBounds(bounds);
-map.panToBounds(bounds);  
+// map.panToBounds(bounds);
 
 });
