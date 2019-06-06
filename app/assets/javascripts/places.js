@@ -26,7 +26,7 @@ document.addEventListener("turbolinks:load", function() {
         });
         bounds.extend(locationMarker.position);
 
-        var image = "app/assets/images/parking.png";
+        var image = "https://img.icons8.com/color/48/000000/car-top-view.png";
         var carMarker = map.addMarker({
             lat: place.latitude,
             lng: place.longitude,
