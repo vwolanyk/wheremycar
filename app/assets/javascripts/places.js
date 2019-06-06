@@ -37,22 +37,16 @@
 // }
 
 document.addEventListener("turbolinks:load", function(){
+
 var place = JSON.parse(document.querySelector("#map").dataset.place);
-var map = new GMaps({
-  div: '#map',
-  zoom: 17
-});
 
 var bounds = new google.maps.LatLngBounds();
+navigator.geolocation.getCurrentPosition(function(position) {
+  var map = new GMaps({
+    div: '#map'
+  });
 
-navigator.geolocation.getCurrentPosition(success, error, options);
-var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
-function success(pos) {
-  var crd = pos.coords;
+  var crd = position.coords;
   var locationMarker = map.addMarker({
     lat: crd.latitude,
     lng: crd.longitude,
@@ -67,24 +61,22 @@ function success(pos) {
 
  });
  bounds.extend(locationMarker.position);
-};
+ var image = "https://img.icons8.com/color/48/000000/car-top-view.png";
+ var carMarker = map.addMarker({
+   lat: place.latitude,
+   lng: place.longitude,
+   title: 'Voiture',
+   icon: image
+ });
 
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-}
-setTimeout(function(){}, 700);
+ bounds.extend(carMarker.position);
+ window.bounds = bounds;
+ map.fitBounds(bounds);
+ var listener = google.maps.event.addListener(map, "idle", function() {
+   if (map.getZoom() > 17) map.setZoom(17);
+   google.maps.event.removeListener(listener);
+ });
 
-var image = "https://img.icons8.com/color/48/000000/car-top-view.png";
-var carMarker = map.addMarker({
-  lat: place.latitude,
-  lng: place.longitude,
-  title: 'Voiture',
-  icon: image
 });
-
-bounds.extend(carMarker.position);
-window.bounds = bounds;
-map.fitBounds(bounds);
-// map.panToBounds(bounds);
 
 });
