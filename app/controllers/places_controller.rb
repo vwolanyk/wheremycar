@@ -1,14 +1,10 @@
 class PlacesController < ApplicationController
-  before_action :set_place, only: [:show, :edit, :update, :destroy, :set_location]
+  before_action :set_place, only: [:show, :update,:set_location]
 
-  # GET /places
-  # GET /places.json
   def index
     @places = Place.all
   end
 
-  # GET /places/1
-  # GET /places/1.json
   def show
   end
 
@@ -25,7 +21,6 @@ class PlacesController < ApplicationController
   # POST /places.json
   def create
     @place = Place.new(place_params)
-
     respond_to do |format|
       if @place.save
         format.html { redirect_to @place, notice: 'Place was successfully created.' }

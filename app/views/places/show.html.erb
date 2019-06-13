@@ -3,20 +3,25 @@
 <% end %>
 
 <div class="text-center" style="margin: auto; background-color:#298689; color: black; font-family: tahoma; padding: .5 rem;";>
-  <h1 style="font-size: 2.5rem; padding: 1rem; margin: auto;"><strong>Dude Where's My Car?</strong></h1>
- <p id="notice" style="margin: auto; padding-bottom: 1rem;"><%= notice %></p></div>
+  <h1 style="font-size: 2.5rem; padding: 1rem; margin: auto;">
+    <strong>Where's The Car?</strong>
+  </h1>
+  <p id="notice" style="margin: auto; padding-bottom: 1rem;"><%= notice %></p>
+</div>
 
-    <%= tag.div nil, id: 'map', data: { place: @place.to_json }, style: "height: 62rem; margin: auto;" %>
+<%= tag.div nil, id: 'map', data: { place: @place.to_json }, style: "height: 62rem; margin: auto;" %>
 
-  <div class="" style="text-align:center;">
-    <h3 style="margin-top: 1rem; font-size: 2rem;">Park the Car</h2>
+<div class="" style="text-align:center;">
+  <h2 style="margin-top: 1rem; font-size: 2rem;">Park the Car</h2>
 
-      <%= button_to [:set_location, @place], class: "btn ", style: "background-color: red; text-align: center; border-radius: 50%; padding: 1rem; margin: 1rem auto;" do %>
-         <%= image_tag "parking.png", style: "margin: auto; height: 8rem;"%>
-    <% end %>
+  <%= button_to [:set_location, @place], class: "btn ", style: "background-color: red; text-align: center; border-radius: 50%; padding: 1rem; margin: 1rem auto;" do %>
+      <%= image_tag "parking.png", style: "margin: auto; height: 8rem;"%>
+  <% end %>
+</div>
 
-  </div>
-
-  <div class="text-center" style="background-color:#298689;">
-     <h3 style="color: black;font-size: 2rem; padding: 1rem;">Last Updated: <%= @place.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %B %d at %I:%M%p") %></h3>
-   </div>
+<div class="text-center" style="background-color:#298689;">
+  <h3 style="color: black;font-size: 2rem; padding: 1rem;">
+    Last Updated:
+    <%= @place.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %B %d at %I:%M%p") %>
+  </h3>
+</div>
